@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
+const { ESRCH } = require('constants');
 const TwitterStrategy = require('passport-twitter').Strategy;
 
 require('dotenv').config();
@@ -56,10 +57,19 @@ app.get('/api',(req,res) => {
     });
 })
 
+app.get('/api/user',(req,res) => {
+  if(req.session.passport != undefined){
+    res.send(req.session.passport.user);
+  }else{
+    res.send('404');
+  }
+})
+
 app.get('/twitter/auth',passport.authenticate('twitter'));
 app.get('/twitter/callback',passport.authenticate('twitter',{
   failureRedirect: '/'
 }),function(req,res){
+  console.log(req.session);
   res.redirect('/home');
 });
 
