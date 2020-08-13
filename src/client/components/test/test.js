@@ -15,7 +15,7 @@ export const Test = () => {
             }
         };
         fetchData();
-    })
+    },[])
 
     return (
         <div>

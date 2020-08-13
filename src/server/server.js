@@ -15,7 +15,11 @@ app.use(session({
     secret : 'secret-key',
     resave : true,
     saveUninitialized : false,
-    //cookie : {secure:true}
+    cookie : {
+      secure: false,
+    httpOnly : true,
+    maxAge : 24 * 60 * 60 * 1000
+      }
   }));
 
 //passport初期化
@@ -50,6 +54,8 @@ passport.use(new TwitterStrategy({
 //distディレクトリ内の静的ファイルにアクセス
 app.use(express.static(path.resolve('./','dist')));
 
+
+
 app.get('/api',(req,res) => {
     res.send({
         api: 'test',
@@ -61,7 +67,7 @@ app.get('/api/user',(req,res) => {
   if(req.session.passport != undefined){
     res.send(req.session.passport.user);
   }else{
-    res.send('404');
+    res.status(404).send(null);
   }
 })
 
