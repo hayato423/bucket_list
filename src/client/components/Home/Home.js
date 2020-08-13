@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
@@ -21,7 +22,7 @@ const Home = () => {
   return(
     <div>
       <h1>ようこそ,{name}さん</h1>
-      <p></p>
+      <Link to='/createlist'>バケツリストを作成</Link>
     </div>
   );
 }
