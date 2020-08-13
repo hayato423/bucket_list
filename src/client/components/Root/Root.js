@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
-export const Test = () => {
+export const Root = () => {
     const [data, setData] = useState('テスト');
 
     useEffect(()=> {
@@ -26,4 +26,4 @@ export const Test = () => {
     );
 };
 
-export default Test
+export default Root;

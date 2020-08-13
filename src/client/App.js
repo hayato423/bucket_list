@@ -1,9 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {BrowserRouter as Router , Route,Redirect} from 'react-router-dom';
 import axios from 'axios';
-import Test from './components/test/test';
-import Test2  from './components/Test2/Test2';
-import Hello from './components/Hello/Hello';
+import Root from './components/Root/Root';
 import Home from './components/Home/Home';
 
 function App() {
@@ -29,7 +27,7 @@ function App() {
         isLogin ? (
           <Redirect to="/home" />
         ) : (
-          <Test/>
+          <Root/>
         )
       )} />
       <Route path="/home" render={() => (
@@ -39,10 +37,6 @@ function App() {
           <Redirect to="/" />
         )
       )} />
-      {/* <Route exact path="/" component={Test}></Route> */}
-      <Route path="/test2" component={Test2}></Route>
-      <Route path="/hello" component={Hello}></Route>
-      {/* <Route path="/home" component={Home}></Route> */}
     </Router>
   </div>
   );
