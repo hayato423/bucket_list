@@ -8,11 +8,11 @@ module.exports = merge(webpackConfig, {
         historyApiFallback : true,
         inline: true,
         open: true,
-        host: 'localhost',
+        host: '127.0.0.1',
         port: 8080,
         proxy: {
-            '/api/**': {
-                target : 'http://localhost:3000',
+            '/api': {
+                target : 'http://127.0.0.1:3000',
                 secure: false,
                 logLevel: 'debug'
             }
