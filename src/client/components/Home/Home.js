@@ -23,6 +23,7 @@ const Home = () => {
     <div>
       <h1>ようこそ,{name}さん</h1>
       <Link to='/createlist'>バケツリストを作成</Link>
+      <Link to='/listcatalog'>バケツリスト一覧</Link>
     </div>
   );
 }

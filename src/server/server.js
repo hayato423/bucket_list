@@ -6,7 +6,7 @@ const passport = require('passport');
 const { ESRCH } = require('constants');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const mysql = require('mysql');
-const crypto = require('crypto');
+const { isBuffer } = require('util');
 
 
 require('dotenv').config();
@@ -120,11 +120,21 @@ app.post('/api/createlist', (req, res) => {
 
 app.get('/api/listcatalog', (req,res) => {
   const twitter_id = req.session.passport.user.id;
-  con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?',[twitter_id],(error,result,fields)=> {
-    console.log(result);
+  con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?',[twitter_id],(error,result)=> {
+    if(error){console.log(error);}
     res.send(result);
   })
 });
+
+
+app.get('/api/list/:id',(req,res) => {
+  const list_id = req.params.id;
+  con.query("select item_id, item, is_done from bucketlist where list_id=?",[list_id],(error,result) => {
+    if(error){console.log(error);}
+    res.send(result);
+  });
+
+})
 
 
 app.get('/twitter/auth', passport.authenticate('twitter'));
