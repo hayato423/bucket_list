@@ -96,10 +96,10 @@ app.post('/api/createlist', (req, res) => {
   const list_title = req.body.title;
   const items = req.body.items;
   const json = {
-    twitter_id : twitter_id,
-    list_id : list_id,
-    list_title : list_title,
-    items : items
+    twitter_id: twitter_id,
+    list_id: list_id,
+    list_title: list_title,
+    items: items
   }
   var status = 200;
   try {
@@ -110,7 +110,7 @@ app.post('/api/createlist', (req, res) => {
   } catch (error) {
     console.log(error);
     status = 500;
-  }finally{
+  } finally {
     res.status(status).send(json);
   }
 
@@ -118,22 +118,44 @@ app.post('/api/createlist', (req, res) => {
 
 
 
-app.get('/api/listcatalog', (req,res) => {
+app.get('/api/listcatalog', (req, res) => {
   const twitter_id = req.session.passport.user.id;
-  con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?',[twitter_id],(error,result)=> {
-    if(error){console.log(error);}
+  con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?', [twitter_id], (error, result) => {
+    if (error) { console.log(error); }
     res.send(result);
   })
 });
 
 
-app.get('/api/list/:id',(req,res) => {
+app.get('/api/list/:id', (req, res) => {
   const list_id = req.params.id;
-  con.query("select item_id, item, is_done from bucketlist where list_id=?",[list_id],(error,result) => {
-    if(error){console.log(error);}
+  con.query("select list_title, item_id, item, is_done from bucketlist where list_id=?", [list_id], (error, result) => {
+    if (error) { console.log(error); }
     res.send(result);
   });
 
+})
+
+app.put('/api/achievement/:list_id/:item_id', (req, res) => {
+  con.query("update bucketlist set is_done = 1 where list_id = ? and item_id = ?", [req.params.list_id, req.params.item_id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send(result);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+})
+
+app.delete('/api/deletelist/:list_id',(req,res) => {
+  con.query('delete from bucketlist where list_id = ?',[req.params.list_id],(error,result)=>{
+    if(error) {
+      console.log(error);
+      res.status(500).send(result);
+    } else {
+      res.status(200).send(result);
+    }
+  });
 })
 
 
