@@ -120,10 +120,21 @@ app.post('/api/createlist', (req, res) => {
 
 app.get('/api/listcatalog', (req, res) => {
   const twitter_id = req.session.passport.user.id;
+  const object_array = [];
   con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?', [twitter_id], (error, result) => {
-    if (error) { console.log(error); }
-    res.send(result);
-  })
+    if (error) console.log(error);
+    //res.send(result);
+    result.map((RowDataPacket) => {
+      con.query('select count(*) as total, count(is_done=1 or null) as done from bucketlist where list_id=?',
+      [RowDataPacket.list_id],(error,result) => {
+        if(error)console.log(error);
+        console.log({...RowDataPacket,...result[0]});
+        object_array.push({...RowDataPacket,...result[0]});
+      });
+    });
+    res.send(object_array);
+    console.log(object_array);
+  });
 });
 
 
