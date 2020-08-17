@@ -10,7 +10,7 @@ const ListCatalog = () => {
     const fetchBucketLists = async () => {
       try {
         const result = await axios.get('http://127.0.0.1:3000/api/listcatalog')
-        //console.log(result.data);
+        console.log(result.data);
         setBucketLists(result.data);
       } catch (error) {
         console.log(error);
