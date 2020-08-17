@@ -132,7 +132,7 @@ app.get('/api/listcatalog',async (req, res) => {
       if(err){
         console.log(err);
       }else{
-        con.query('select list_id , count(list_id) as done from bucketlist where twitter_id=? and is_done=1 group by list_id order by list_id',[twitter_id],(err,result3)=>{
+        con.query('select list_id , count(is_done=1 or null) as done from bucketlist where twitter_id="2361263892" group by list_id order by list_id',[twitter_id],(err,result3)=>{
           if(err){
             console.log(err);
           }else{
