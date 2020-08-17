@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Item from './Item';
+
 
 const ListCatalog = () => {
   const [bucketLists, setBucketLists] = useState([]);
@@ -33,7 +34,7 @@ const ListCatalog = () => {
   return (
     <div>
       <h1>バケツリスト一覧</h1>
-      {bucketLists.map((bucketList, index) => <div key={index}><Link to={'/list/' + bucketList.list_id} >{bucketList.list_title}</Link><button onClick={() => deleteList(bucketList.list_id)}>削除</button></div>)}
+      {bucketLists.map((data,index) => <Item data={data} clickButton={(list_id)=> deleteList(list_id)} key={index}/>)}
     </div>
   );
 }

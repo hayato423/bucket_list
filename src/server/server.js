@@ -140,7 +140,7 @@ app.get('/api/listcatalog',async (req, res) => {
             for(let i = 0; i < result1.length; ++i) {
               resultArray.push({...result1[i],...result2[i],...result3[i]});
             }
-            console.log(resultArray);
+            //console.log(resultArray);
             res.send(resultArray);
           }
         })
