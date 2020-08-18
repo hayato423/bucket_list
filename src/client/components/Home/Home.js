@@ -6,6 +6,7 @@ import listCatalog from '../ListCatalog/ListCatalog';
 import BucketList from '../BucketList/BucketList';
 import SideBar from '../SideBar/SideBar';
 import ListCatalog from '../ListCatalog/ListCatalog';
+import './style.css';
 
 const Home = () => {
   const [name, setName] = useState('');
