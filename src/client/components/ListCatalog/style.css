@@ -1,0 +1,29 @@
+.title {
+  border : 2px solid;
+  border-color: #eeeeee;
+  border-left: transparent;
+  border-top: transparent;
+  border-right: transparent;
+}
+
+.list_meter {
+  width: 20vw;
+  height: 2vw;
+
+}
+
+.list_meter::-webkit-meter-optimum-value{
+  background: #ebfa1b;
+  width: 20vw;
+  height: 2vw;
+}
+
+:-moz-meter-optimum::-moz-meter-bar {
+  background: #ebfa1b;
+}
+
+.list_link ,.list_link:hover,.list_link:visited,.list_link:active{
+  font-size: 1.5em;
+  color: #333333;
+  text-decoration: none;
+}
