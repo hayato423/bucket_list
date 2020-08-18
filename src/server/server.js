@@ -6,7 +6,9 @@ const passport = require('passport');
 const { ESRCH } = require('constants');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const mysql = require('mysql');
+const mysqlPromise = require('./mysqlPromise');
 const { isBuffer } = require('util');
+const { resolve } = require('path');
 
 
 require('dotenv').config();
@@ -71,6 +73,7 @@ const con = mysql.createConnection({
 });
 
 
+
 app.get('/api/user', (req, res) => {
   if (req.session.passport != undefined) {
     res.send(req.session.passport.user);
@@ -118,12 +121,47 @@ app.post('/api/createlist', (req, res) => {
 
 
 
+app.get('/api/listcatalog',async (req, res) => {
+  const twitter_id = req.session.passport.user.id;
+  con.query('select distinct list_id, list_title from bucketlist where twitter_id=? order by list_id',[twitter_id],(err,result1)=> {
+    if(err){
+      console.log(err);
+    }else{
+    }
+    con.query('select list_id, count(list_id) as total  from bucketlist where twitter_id=? group by list_id order by list_id',[twitter_id],(err,result2)=>{
+      if(err){
+        console.log(err);
+      }else{
+        con.query('select list_id , count(is_done=1 or null) as done from bucketlist where twitter_id="2361263892" group by list_id order by list_id',[twitter_id],(err,result3)=>{
+          if(err){
+            console.log(err);
+          }else{
+            const resultArray = [];
+            for(let i = 0; i < result1.length; ++i) {
+              resultArray.push({...result1[i],...result2[i],...result3[i]});
+            }
+            //console.log(resultArray);
+            res.send(resultArray);
+          }
+        })
+      }
+    })
+  })
+  // [result1,field1] = await mysqlPromise.query(con,'select distinct list_id, list_title from bucketlist where twitter_id=? order by list_id',[twitter_id]);
+  // console.log(result1);
+  // [result2,field2] = await mysqlPromise.query(con,'select list_id, count(list_id) as total  from bucketlist where twitter_id=? group by list_id order by list_id',[twitter_id]);
+  // console.log(result2);
+  // [result3,field3] = await mysqlPromise.query(con,'select list_id , count(list_id) as done from bucketlist where twitter_id=? and is_done=1 group by list_id order_by list_id',[twitter_id]);
+  // console.log(result3);
+})
+
+
 app.get('/api/listcatalog', (req, res) => {
   const twitter_id = req.session.passport.user.id;
   con.query('select distinct list_id, list_title  from bucketlist where twitter_id=?', [twitter_id], (error, result) => {
-    if (error) { console.log(error); }
-    res.send(result);
-  })
+    if (error) console.log(error);
+    else res.send(result);
+  });
 });
 
 
@@ -147,9 +185,9 @@ app.put('/api/achievement/:list_id/:item_id', (req, res) => {
   });
 })
 
-app.delete('/api/deletelist/:list_id',(req,res) => {
-  con.query('delete from bucketlist where list_id = ?',[req.params.list_id],(error,result)=>{
-    if(error) {
+app.delete('/api/deletelist/:list_id', (req, res) => {
+  con.query('delete from bucketlist where list_id = ?', [req.params.list_id], (error, result) => {
+    if (error) {
       console.log(error);
       res.status(500).send(result);
     } else {

@@ -1,0 +1,31 @@
+.sidebar {
+  border : 2px solid;
+  border-color: #eeeeee;
+  border-bottom: transparent;
+  border-left: transparent;
+  border-top: transparent;
+  height: 100vh;
+}
+
+.bucket_img {
+  width: 30%;
+}
+
+.button {
+  background-color: #2395ff;
+  border-radius: 30px 30px 30px 30px;
+}
+
+.button:hover {
+  background-color: #1778d3;
+}
+
+.button, .button:link, .button.visited, .button:active {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: #dddddd;
+  text-decoration: none;
+}
