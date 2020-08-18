@@ -11,11 +11,16 @@ module.exports = merge(webpackConfig, {
         host: '127.0.0.1',
         port: 8080,
         proxy: {
-            '/api': {
+            '/api/**': {
+                target : 'http://127.0.0.1:3000',
+                secure: false,
+                logLevel: 'debug'
+            },
+            '/twitter/auth' : {
                 target : 'http://127.0.0.1:3000',
                 secure: false,
                 logLevel: 'debug'
             }
-        }
+        },
     }
 })
