@@ -28,10 +28,10 @@ const Home = () => {
     <div className="home container">
       <Router>
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 py-0 px-0">
             <SideBar />
           </div>
-          <div className="col-md-9">
+          <div className="col-md-9 py-0 px-0">
             <Switch>
               <Route path="/createlist">
                 <CreateList/>

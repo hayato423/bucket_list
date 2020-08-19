@@ -1,0 +1,16 @@
+.achieve_btn {
+  background-color: #ebfa1b;
+  color: #ffffff;
+  border-radius: 5px 5px 5px 5px;
+  border: 0 none;
+}
+
+.achieve_btn:focus {
+  outline-color:#dfe95c;
+}
+
+.achieved {
+  background-color: #faac1b;
+  color: #ffffff;
+  border-radius: 5px 5px 5px 5px;
+}
