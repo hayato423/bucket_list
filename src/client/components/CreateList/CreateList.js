@@ -1,5 +1,6 @@
 import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
+import "./style.css";
 
 
 export const CreateList = () => {
@@ -21,6 +22,8 @@ export const CreateList = () => {
   }
 
   const postBucketList = async () =>{
+    setItemList([]);
+    setTitle('');
     const bucketListJson = {
       title : title,
       items : itemList
@@ -38,18 +41,23 @@ export const CreateList = () => {
 
 
   return (
-    <div>
-      <h1>バケツリスト作成</h1>
+    <div className="createlist text-center">
+      <h2 className="createlist_title">バケツリスト作成</h2>
       <form >
-        <label>タイトル</label>
-        <input type="text" onChange={() => setTitle(event.target.value)} value={title}/>
-        <br></br>
-        <label>項目</label>
-        <input type="text" onChange={() => setItem(event.target.value)} value={item} />
-        <input type="button" value="+" onClick={() => addItem() } />
+        <table>
+          <tr>
+            <th className="px-3"><label>タイトル</label></th>
+            <th><input className="input_textbox" type="text" onChange={() => setTitle(event.target.value)} value={title}/></th>
+          </tr>
+          <tr>
+            <th><label className="px-3">項目</label></th>
+            <th><input className="input_textbox" type="text" onChange={() => setItem(event.target.value)} value={item} /></th>
+            <th><input className="btn btn-primary" type="button" value="+" onClick={() => addItem() } /></th>
+          </tr>
+        </table>
       </form>
-      <ul>{itemList.map((item,index)=><li key={index}>{item}<input type="button" value="☓" onClick={()=> deleteItem(index)}/></li>)}</ul>
-      <input type="button" value="投稿" onClick={() => postBucketList()} />
+      <ul className="list-group">{itemList.map((item,index)=><li className="list-group-item" key={index}>{item}<input className="btn btn-danger ml-3" type="button" value="☓" onClick={()=> deleteItem(index)}/></li>)}</ul>
+      <input className="btn btn-success" type="button" value="作成" onClick={() => postBucketList()} />
     </div>
   );
 

@@ -1,0 +1,16 @@
+.input_textbox {
+  width: 25vw;
+}
+
+th {
+  height: 8vh;
+}
+
+
+.createlist_title {
+  border : 2px solid;
+  border-color: #eeeeee;
+  border-left: transparent;
+  border-top: transparent;
+  border-right: transparent;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './style.css';
 
 const BucketList = () => {
   const [bucketList, setBucketList] = useState([]);
@@ -33,15 +34,18 @@ const BucketList = () => {
 
   return (
     <div>
-      <div>{listTitle}</div>
-      <table>
+      <h2 className="title text-center">{listTitle}</h2>
+      <ul className="list-group">
+
+      </ul>
+      <table className="table table-striped">
         <tbody>
           {bucketList.map((content) => {
             let isDoneElement;
             if (parseInt(content.is_done, 10) === 0) {
-              isDoneElement = <input type="button" value="達成！" onClick={() => achievement(list_id, content.item_id)} />
+              isDoneElement = <input type="button" value="達成！" onClick={() => achievement(list_id, content.item_id)} className="ml-3 achieve_btn py-1 px-2"/>
             } else {
-              isDoneElement = <span>達成済み</span>
+              isDoneElement = <span className="ml-3 achieved py-2 px-2">達成済み</span>
             }
             return (
               <tr key={content.item_id}>

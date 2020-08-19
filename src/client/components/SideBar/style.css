@@ -2,9 +2,9 @@
   border : 2px solid;
   border-color: #eeeeee;
   border-bottom: transparent;
-  border-left: transparent;
   border-top: transparent;
   height: 100vh;
+  background-color: #fafafa;
 }
 
 .bucket_img {

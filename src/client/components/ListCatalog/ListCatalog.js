@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Item from './Item';
+import './style.css';
 
 
 const ListCatalog = () => {
@@ -32,8 +33,8 @@ const ListCatalog = () => {
   }
 
   return (
-    <div>
-      <h1>バケツリスト一覧</h1>
+    <div className="text-center">
+      <h2 className="title">バケツリスト一覧</h2>
       {bucketLists.map((data,index) => <Item data={data} clickButton={(list_id)=> deleteList(list_id)} key={index}/>)}
     </div>
   );

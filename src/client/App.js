@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Header from './components/Header/Header';
 import Root from './components/Root/Root';
 import Home from './components/Home/Home';
 
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App container">
+      <Header/>
       <Router>
       <Route exact path="/" render={() => (isLogin ? (<Redirect to="/home" />) : (<Root />))} />
       <Route path="/home" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
