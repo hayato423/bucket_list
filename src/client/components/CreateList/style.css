@@ -1,3 +1,8 @@
+.createlist {
+  background-color: #fafafa;
+  height: 100vh;
+}
+
 .input_textbox {
   width: 25vw;
 }

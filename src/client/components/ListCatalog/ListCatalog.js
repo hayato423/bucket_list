@@ -19,7 +19,7 @@ const ListCatalog = () => {
       }
     }
     fetchBucketLists();
-  }, [doDelete])
+  }, [doDelete,])
 
   const deleteList = async (list_id) => {
     const confirm = window.confirm("本当に削除しますか？");
@@ -33,7 +33,7 @@ const ListCatalog = () => {
   }
 
   return (
-    <div className="text-center">
+    <div className="text-center listcatalog">
       <h2 className="title">バケツリスト一覧</h2>
       {bucketLists.map((data,index) => <Item data={data} clickButton={(list_id)=> deleteList(list_id)} key={index}/>)}
     </div>

@@ -31,25 +31,21 @@ const Home = () => {
           <div className="col-md-3 py-0 px-0">
             <SideBar />
           </div>
-          <div className="col-md-9 py-0 px-0">
+          <div className="col-md-9 py-0 px-0 main_contents">
             <Switch>
-              <Route path="/createlist">
-                <CreateList/>
+              <Route exact path="/">
+                <ListCatalog />
               </Route>
-              <Route path="/home">
-                <ListCatalog/>
+              <Route path="/createlist">
+                <CreateList />
               </Route>
               <Route path="/list/:id">
-                <BucketList/>
+                <BucketList />
               </Route>
             </Switch>
-            {/* <Route path="/createlist" component={<CreateList/>} />
-            <Route path="/home" component={<ListCatalog/>} />
-            <Route path="/list/:id" component={<BucketList/>} /> */}
           </div>
         </div>
       </Router>
-
     </div>
   );
 }

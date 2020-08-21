@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, useLocation, Switch } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header/Header';
 import Root from './components/Root/Root';
@@ -23,10 +23,13 @@ function App() {
 
   return (
     <div className="App container">
-      <Header/>
+      <Header />
       <Router>
-      <Route exact path="/" render={() => (isLogin ? (<Redirect to="/home" />) : (<Root />))} />
-      <Route path="/home" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
+        <Switch>
+          <Route exact path="/" render={() => (isLogin ? (<Home />) : (<Root />))} />
+          <Route path="/*" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
+          <Route render={() => <h2>Not Found</h2>} />
+        </Switch>
       </Router>
     </div>
   );
