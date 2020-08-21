@@ -23,10 +23,10 @@ function App() {
 
   return (
     <div className="App container">
-      <Header/>
+      <Header />
       <Router>
-      <Route exact path="/" render={() => (isLogin ? (<Redirect to="/home" />) : (<Root />))} />
-      <Route path="/*" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
+        <Route exact path="/" render={() => (isLogin ? (<Home/>) : (<Root />))} />
+        <Route path="/*" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
       </Router>
     </div>
   );

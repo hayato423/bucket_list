@@ -8,7 +8,7 @@ const SideBar = () => {
     <div className="sidebar text-center pt-5">
       <img src={bucket_img} className="img-fluid bucket_img" />
       <div className="py-5 px-3">
-      <Link to='/home' className="button py-3 px-2">バケツリスト一覧</Link>
+      <Link to='/' className="button py-3 px-2">バケツリスト一覧</Link>
       </div>
       <div className="py-5 px-3">
       <Link to='/createlist' className="button py-3 px-2">バケツリスト作成</Link>

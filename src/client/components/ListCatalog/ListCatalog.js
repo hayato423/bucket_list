@@ -19,7 +19,7 @@ const ListCatalog = () => {
       }
     }
     fetchBucketLists();
-  }, [doDelete])
+  }, [doDelete,])
 
   const deleteList = async (list_id) => {
     const confirm = window.confirm("本当に削除しますか？");
