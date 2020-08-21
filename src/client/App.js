@@ -26,7 +26,7 @@ function App() {
       <Header/>
       <Router>
       <Route exact path="/" render={() => (isLogin ? (<Redirect to="/home" />) : (<Root />))} />
-      <Route path="/home" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
+      <Route path="/*" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} />
       </Router>
     </div>
   );
