@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
+const {check,validationResult, body} = require('express-validator');
 const passport = require('passport');
 const { ESRCH } = require('constants');
 const TwitterStrategy = require('passport-twitter').Strategy;
@@ -82,7 +83,11 @@ app.get('/api/user', (req, res) => {
   }
 })
 
-app.post('/api/createlist', (req, res) => {
+app.post('/api/createlist',[
+  body('title').isLength({min:1,max:50}),
+  body('items.*').isLength({min:1,max:20})
+] ,(req, res) => {
+
   const createRandomID = () => {
     const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let T = '';
@@ -98,13 +103,13 @@ app.post('/api/createlist', (req, res) => {
   const twitter_id = req.session.passport.user.id;
   const list_title = req.body.title;
   const items = req.body.items;
-  const json = {
-    twitter_id: twitter_id,
-    list_id: list_id,
-    list_title: list_title,
-    items: items
-  }
   var status = 200;
+
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(422).json({errors:errors.array() });
+  }
+
   try {
     items.forEach((item, index) => {
       con.query("insert into bucketlist values(?,?,?,?,?,?)",
@@ -114,7 +119,7 @@ app.post('/api/createlist', (req, res) => {
     console.log(error);
     status = 500;
   } finally {
-    res.status(status).send(json);
+    res.status(status).send('');
   }
 
 });
