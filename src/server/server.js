@@ -84,8 +84,8 @@ app.get('/api/user', (req, res) => {
 })
 
 app.post('/api/createlist',[
-  body('title').isLength({min:1,max:50}),
-  body('items.*').isLength({min:1,max:20})
+  body('title',"タイトルは1文字以上50文字以内で入力してください").isLength({min:1,max:50}).trim().escape(),
+  body('items.*',"項目は1文字以上50文字以内で入力してください").isLength({min:1,max:50}).trim().escape()
 ] ,(req, res) => {
 
   const createRandomID = () => {
@@ -107,7 +107,7 @@ app.post('/api/createlist',[
 
   const errors = validationResult(req);
   if(!errors.isEmpty()) {
-    return res.status(422).json({errors:errors.array() });
+    return res.status(422).send({errors:errors.array() });
   }
 
   try {

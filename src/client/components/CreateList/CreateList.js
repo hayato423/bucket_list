@@ -10,7 +10,7 @@ export const CreateList = () => {
 
   const addItem = () => {
     if (item != '') {
-      if (item.length < 1 || item.length > 100) {
+      if (item.length < 1 || item.length > 50) {
         alert('1文字以上50文字以内で入力してください');
       } else {
         setItemList([...itemList, item]);
