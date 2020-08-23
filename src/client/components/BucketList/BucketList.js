@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Modal } from 'react-bootstrap';
 import './style.css';
 
 const BucketList = () => {
   const [bucketList, setBucketList] = useState([]);
   const [listTitle, setListTitle] = useState('');
   const [onClick, setOnClick] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [achievedItem, setAchievedItem] = useState('');
+  const [tweetString, setTweetString] = useState('');
+  const handleShow = () => setModalShow(true);
+  const handleClose = () => setModalShow(false);
+
   const params = useParams();
   const list_id = params.id;
 
@@ -24,11 +31,14 @@ const BucketList = () => {
     itemFetch();
   }, [onClick])
 
-  const achievement = async (list_id, item_id) => {
+  const achievement = async (list_id, item_id, item_name) => {
     const result = await axios.put(`http://127.0.0.1:3000/api/achievement/${list_id}/${item_id}`);
     setOnClick(!onClick);
     if (result.status == 200) {
-      alert('達成おめでとうございます！');
+      //alert('達成おめでとうございます！');
+      setAchievedItem(item_name);
+      setTweetString('https://twitter.com/intent/tweet?text='+ achievedItem);
+      handleShow();
     }
   }
 
@@ -43,7 +53,7 @@ const BucketList = () => {
           {bucketList.map((content) => {
             let isDoneElement;
             if (parseInt(content.is_done, 10) === 0) {
-              isDoneElement = <input type="button" value="達成！" onClick={() => achievement(list_id, content.item_id)} className="ml-3 achieve_btn py-1 px-2"/>
+              isDoneElement = <input type="button" value="達成！" onClick={() => achievement(list_id, content.item_id, content.item)} className="ml-3 achieve_btn py-1 px-2" />
             } else {
               isDoneElement = <span className="ml-3 achieved py-2 px-2">達成済み</span>
             }
@@ -57,6 +67,20 @@ const BucketList = () => {
           })}
         </tbody>
       </table>
+
+      <Modal show={modalShow} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <h1>{achievedItem}</h1>
+            <h2>達成おめでとうございます！</h2>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+        <a class="twitter-share-button" href={tweetString}>Tweet</a>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
