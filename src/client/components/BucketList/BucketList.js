@@ -32,7 +32,7 @@ const BucketList = () => {
   }, [onClick])
 
   useEffect(() => {
-    const encodedStr = encodeURIComponent(achievedItem);
+    const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目「${achievedItem}」を達成しました\n#バケツリストメーカー`);
     setTwitterHref('https://twitter.com/intent/tweet?text='+encodedStr);
   },[achievedItem])
 
@@ -75,13 +75,14 @@ const BucketList = () => {
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
-          <div>
+          <div className="text-center">
             <h1>{achievedItem}</h1>
             <h2>達成おめでとうございます！</h2>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <a  id="twitter-share-button" className="twitter-share-button" href={twitterHref}>Tweet</a>
+          <button className="btn btn-secondary" onClick={()=>handleClose()}>close</button>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}>Tweet</a>
         </Modal.Footer>
       </Modal>
     </div>
