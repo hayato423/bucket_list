@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
@@ -10,9 +10,9 @@ const BucketList = () => {
   const [onClick, setOnClick] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [achievedItem, setAchievedItem] = useState('');
-  const [tweetString, setTweetString] = useState('');
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
+  const [twitterHref,setTwitterHref] = useState('#');
 
   const params = useParams();
   const list_id = params.id;
@@ -31,13 +31,16 @@ const BucketList = () => {
     itemFetch();
   }, [onClick])
 
+  useEffect(() => {
+    const encodedStr = encodeURIComponent(achievedItem);
+    setTwitterHref('https://twitter.com/intent/tweet?text='+encodedStr);
+  },[achievedItem])
+
   const achievement = async (list_id, item_id, item_name) => {
     const result = await axios.put(`http://127.0.0.1:3000/api/achievement/${list_id}/${item_id}`);
     setOnClick(!onClick);
     if (result.status == 200) {
-      //alert('達成おめでとうございます！');
       setAchievedItem(item_name);
-      setTweetString('https://twitter.com/intent/tweet?text='+ achievedItem);
       handleShow();
     }
   }
@@ -78,7 +81,7 @@ const BucketList = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-        <a class="twitter-share-button" href={tweetString}>Tweet</a>
+          <a  id="twitter-share-button" className="twitter-share-button" href={twitterHref}>Tweet</a>
         </Modal.Footer>
       </Modal>
     </div>
