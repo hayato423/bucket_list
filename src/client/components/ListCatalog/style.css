@@ -33,3 +33,10 @@
   color: #333333;
   text-decoration: none;
 }
+
+
+.all_achieved_icon {
+  background-color: #faac1b;
+  color: #ffffff;
+  border-radius: 5px 5px 5px 5px;
+}

@@ -13,6 +13,7 @@ const Item = (props) => {
       </div>
       <div>
         <meter value={data.done/data.total} className="list_meter"></meter>
+        {(data.done === data.total) && <span class="all_achieved_icon px-2 py-2 ml-2 my-5">全部達成！</span>}
       </div>
     </div>
   )
