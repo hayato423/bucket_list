@@ -10,9 +10,10 @@ const BucketList = () => {
   const [onClick, setOnClick] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [achievedItem, setAchievedItem] = useState('');
+  const [twitterHref,setTwitterHref] = useState('#');
+
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
-  const [twitterHref,setTwitterHref] = useState('#');
 
   const params = useParams();
   const list_id = params.id;
@@ -23,8 +24,6 @@ const BucketList = () => {
         .catch(err => {
           console.log(err);
         });
-      //console.log(result.data);
-      //console.log(result.data[0].list_title);
       setListTitle(result.data[0].list_title);
       setBucketList(result.data);
     }
@@ -36,6 +35,7 @@ const BucketList = () => {
     setTwitterHref('https://twitter.com/intent/tweet?text='+encodedStr);
   },[achievedItem])
 
+
   const achievement = async (list_id, item_id, item_name) => {
     const result = await axios.put(`http://127.0.0.1:3000/api/achievement/${list_id}/${item_id}`);
     setOnClick(!onClick);
@@ -45,12 +45,11 @@ const BucketList = () => {
     }
   }
 
+
+
   return (
     <div>
       <h2 className="title text-center">{listTitle}</h2>
-      <ul className="list-group">
-
-      </ul>
       <table className="table table-striped">
         <tbody>
           {bucketList.map((content) => {
