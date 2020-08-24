@@ -11,9 +11,16 @@ const BucketList = () => {
   const [modalShow, setModalShow] = useState(false);
   const [achievedItem, setAchievedItem] = useState('');
   const [twitterHref,setTwitterHref] = useState('#');
+  const [total,setTotal] = useState(0);
+  const [achievedCount,setAchievedCount] = useState(0);
 
   const handleShow = () => setModalShow(true);
-  const handleClose = () => setModalShow(false);
+  const handleClose = () => {
+    setModalShow(false);
+    if(total == achievedCount){
+      alert('全部達成しました！');
+    }
+  }
 
   const params = useParams();
   const list_id = params.id;
@@ -24,6 +31,14 @@ const BucketList = () => {
         .catch(err => {
           console.log(err);
         });
+      setTotal(result.data.length);
+      let count = 0;
+      for(let i = 0; i < result.data.length; ++i) {
+        if(result.data[i].is_done == 1) {
+          count++;
+        }
+      }
+      setAchievedCount(count);
       setListTitle(result.data[0].list_title);
       setBucketList(result.data);
     }
