@@ -98,7 +98,7 @@ export const CreateList = () => {
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={() => handleClose()}>close</button>
-          <a className="twitter-share-button btn btn-primary" href={twitterHref}>Tweet</a>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
         </Modal.Footer>
       </Modal>
     </div>

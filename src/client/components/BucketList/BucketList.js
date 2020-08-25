@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
-import AchievedModal from './AchievedModal';
 import './style.css';
 
 const BucketList = () => {
@@ -103,7 +102,7 @@ const BucketList = () => {
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={() => handleAchievedModalClose()}>close</button>
-          <a className="twitter-share-button btn btn-primary" href={twitterHref}>Tweet</a>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
         </Modal.Footer>
       </Modal>
 
@@ -118,7 +117,7 @@ const BucketList = () => {
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={() => handleAllAchievedModalClose()}>close</button>
-          <a className="twitter-share-button btn btn-primary" href={twitterHref}>Tweet</a>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
         </Modal.Footer>
       </Modal>
     </div>
