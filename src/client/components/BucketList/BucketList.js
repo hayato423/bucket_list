@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
@@ -8,11 +8,25 @@ const BucketList = () => {
   const [bucketList, setBucketList] = useState([]);
   const [listTitle, setListTitle] = useState('');
   const [onClick, setOnClick] = useState(false);
-  const [modalShow, setModalShow] = useState(false);
+  const [achievedModalShow, setAchievedModalShow] = useState(false);
+  const [allAchievedModalShow,setAllAchievedModalShow] = useState(false);
   const [achievedItem, setAchievedItem] = useState('');
-  const handleShow = () => setModalShow(true);
-  const handleClose = () => setModalShow(false);
-  const [twitterHref,setTwitterHref] = useState('#');
+  const [twitterHref, setTwitterHref] = useState('#');
+  const [total, setTotal] = useState(0);
+  const [achievedCount, setAchievedCount] = useState(0);
+
+  const handleAchievedModalShow = () => setAchievedModalShow(true);
+  const handleAchievedModalClose = () => {
+    setAchievedModalShow(false);
+    if (total == achievedCount) {
+      const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目全て達成しました！\n#バケツリストメーカー`);
+      setTwitterHref('https://twitter.com/intent/tweet?text=' + encodedStr);
+      handleAllAchievedModalShow();
+    }
+  }
+
+  const handleAllAchievedModalShow = () => setAllAchievedModalShow(true);
+  const handleAllAchievedModalClose = () => setAllAchievedModalShow(false);
 
   const params = useParams();
   const list_id = params.id;
@@ -23,8 +37,14 @@ const BucketList = () => {
         .catch(err => {
           console.log(err);
         });
-      //console.log(result.data);
-      //console.log(result.data[0].list_title);
+      setTotal(result.data.length);
+      let count = 0;
+      for (let i = 0; i < result.data.length; ++i) {
+        if (result.data[i].is_done == 1) {
+          count++;
+        }
+      }
+      setAchievedCount(count);
       setListTitle(result.data[0].list_title);
       setBucketList(result.data);
     }
@@ -32,25 +52,25 @@ const BucketList = () => {
   }, [onClick])
 
   useEffect(() => {
-    const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目「${achievedItem}」を達成しました\n#バケツリストメーカー`);
-    setTwitterHref('https://twitter.com/intent/tweet?text='+encodedStr);
-  },[achievedItem])
+    const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目「${achievedItem}」を達成しました！\n#バケツリストメーカー`);
+    setTwitterHref('https://twitter.com/intent/tweet?text=' + encodedStr);
+  }, [achievedItem])
+
 
   const achievement = async (list_id, item_id, item_name) => {
     const result = await axios.put(`http://127.0.0.1:3000/api/achievement/${list_id}/${item_id}`);
     setOnClick(!onClick);
     if (result.status == 200) {
       setAchievedItem(item_name);
-      handleShow();
+      handleAchievedModalShow();
     }
   }
+
+
 
   return (
     <div>
       <h2 className="title text-center">{listTitle}</h2>
-      <ul className="list-group">
-
-      </ul>
       <table className="table table-striped">
         <tbody>
           {bucketList.map((content) => {
@@ -71,7 +91,7 @@ const BucketList = () => {
         </tbody>
       </table>
 
-      <Modal show={modalShow} onHide={handleClose} centered>
+      <Modal show={achievedModalShow} onHide={handleAchievedModalClose} centered>
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
@@ -81,8 +101,23 @@ const BucketList = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <button className="btn btn-secondary" onClick={()=>handleClose()}>close</button>
-          <a className="twitter-share-button btn btn-primary" href={twitterHref}>Tweet</a>
+          <button className="btn btn-secondary" onClick={() => handleAchievedModalClose()}>close</button>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={allAchievedModalShow} onHide={handleAllAchievedModalClose} centered>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <h1>{listTitle}</h1>
+            <h2>全て達成おめでとうございます！</h2>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={() => handleAllAchievedModalClose()}>close</button>
+          <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
         </Modal.Footer>
       </Modal>
     </div>
