@@ -74,13 +74,13 @@ export const CreateList = () => {
       <form >
         <table>
           <tr>
-            <th className="px-3"><label>タイトル</label></th>
-            <th><input className="input_textbox" type="text" onChange={() => setTitle(event.target.value)} value={title} /></th>
+            <th className="px-3 createList_th"><label>タイトル</label></th>
+            <th className="createList_th"><input className="input_textbox" type="text" onChange={() => setTitle(event.target.value)} value={title} /></th>
           </tr>
           <tr>
-            <th><label className="px-3">項目</label></th>
-            <th><input className="input_textbox" type="text" onChange={() => setItem(event.target.value)} value={item} /></th>
-            <th><input className="btn btn-primary" type="button" value="+" onClick={() => addItem()} /></th>
+            <th className="createList_th px-3"><label>項目</label></th>
+            <th className="createList_th"><input className="input_textbox" type="text" onChange={() => setItem(event.target.value)} value={item} /></th>
+            <th className="createList_th"><input className="btn btn-primary" type="button" value="+" onClick={() => addItem()} /></th>
           </tr>
         </table>
       </form>

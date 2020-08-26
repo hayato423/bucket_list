@@ -7,11 +7,9 @@ const SideBar = () => {
   return (
     <div className="sidebar text-center pt-5">
       <img src={bucket_img} className="img-fluid bucket_img" />
-      <div className="py-5 px-3">
-      <Link to='/' className="button py-3 px-2">バケツリスト一覧</Link>
-      </div>
-      <div className="py-5 px-3">
-      <Link to='/createlist' className="button py-3 px-2">バケツリスト作成</Link>
+      <div className="row">
+      <Link to='/' className="button py-3 px-2 my-5 col-md-8 offset-md-2 col-sm-4 col-xs-1">バケツリスト一覧</Link>
+      <Link to='/createlist' className="button py-3 px-2 my-5 col-md-8 offset-md-2 col-sm-4 col-xs-1">バケツリスト作成</Link>
       </div>
     </div>
   )
