@@ -14,6 +14,7 @@
 .button {
   background-color: #2395ff;
   border-radius: 30px 30px 30px 30px;
+  font-size: calc(0.75rem + ((1vw - 3.75px) * 0.2589));
 }
 
 .button:hover {

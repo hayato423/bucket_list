@@ -3,6 +3,6 @@
 }
 
 .header_title {
-  font-size: 6em;
+  font-size: calc(1.5rem + ((1vw - 3.75px) * 4.6602));
   color: #ffffff;
 }
