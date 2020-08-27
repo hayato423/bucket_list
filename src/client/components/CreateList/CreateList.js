@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import "./style.css";
-
+import ip from '../../../ipaddress';
 
 export const CreateList = () => {
   const [title, setTitle] = useState('');
@@ -52,7 +52,7 @@ export const CreateList = () => {
           title: title,
           items: itemList
         }
-        const result = await axios.post('http://127.0.0.1:3000/api/createlist', bucketListJson)
+        const result = await axios.post(`http://${ip.ipAddres}/api/createlist`, bucketListJson)
           .catch(err => {
             alert(err);
           });

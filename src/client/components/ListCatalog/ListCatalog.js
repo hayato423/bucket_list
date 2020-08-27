@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Item from './Item';
 import './style.css';
-
+import ip from '../../../ipaddress';
 
 const ListCatalog = () => {
   const [bucketLists, setBucketLists] = useState([]);
@@ -11,7 +11,7 @@ const ListCatalog = () => {
   useEffect(() => {
     const fetchBucketLists = async () => {
       try {
-        const result = await axios.get('http://127.0.0.1:3000/api/listcatalog')
+        const result = await axios.get(`http://${ip.ipAddres}/api/listcatalog`)
         console.log(result.data);
         setBucketLists(result.data);
       } catch (error) {
@@ -24,7 +24,7 @@ const ListCatalog = () => {
   const deleteList = async (list_id) => {
     const confirm = window.confirm("本当に削除しますか？");
     if (confirm === true) {
-      const result = await axios.delete(`http://127.0.0.1:3000/api/deletelist/${list_id}`)
+      const result = await axios.delete(`http://${ip.ipAddres}/api/deletelist/${list_id}`)
         .catch((err) => {
           alert(err);
         });
