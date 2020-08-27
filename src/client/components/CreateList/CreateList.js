@@ -72,7 +72,7 @@ export const CreateList = () => {
     <div className="createlist text-center">
       <h2 className="createlist_title">バケツリスト作成</h2>
       <form >
-        <table>
+        <table align="center">
           <tr>
             <th className="px-3 createList_th"><label>タイトル</label></th>
             <th className="createList_th"><input className="input_textbox" type="text" onChange={() => setTitle(event.target.value)} value={title} /></th>

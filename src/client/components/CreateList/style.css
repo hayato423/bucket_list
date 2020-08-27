@@ -1,10 +1,10 @@
 .createlist {
   background-color: #fafafa;
-  height: 100vh;
+  height: 100vmin;
 }
 
 .input_textbox {
-  width: 25vw;
+  width: max(25vw,250px);
 }
 
 .createList_th{
@@ -18,4 +18,8 @@
   border-left: transparent;
   border-top: transparent;
   border-right: transparent;
+}
+
+label {
+  font-size: calc(0.75rem + ((1vw - 3.75px) * 0.2589));;
 }

@@ -9,7 +9,7 @@ const BucketList = () => {
   const [listTitle, setListTitle] = useState('');
   const [onClick, setOnClick] = useState(false);
   const [achievedModalShow, setAchievedModalShow] = useState(false);
-  const [allAchievedModalShow,setAllAchievedModalShow] = useState(false);
+  const [allAchievedModalShow, setAllAchievedModalShow] = useState(false);
   const [achievedItem, setAchievedItem] = useState('');
   const [twitterHref, setTwitterHref] = useState('#');
   const [total, setTotal] = useState(0);
@@ -120,6 +120,7 @@ const BucketList = () => {
           <a className="twitter-share-button btn btn-primary" href={twitterHref}><i class="fab fa-twitter mr-1"></i>Tweet</a>
         </Modal.Footer>
       </Modal>
+
     </div>
   );
 }
