@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch,useLocation } from 'react-router-dom';
 import axios from 'axios';
 import CreateList from '../CreateList/CreateList';
 import listCatalog from '../ListCatalog/ListCatalog';
@@ -10,6 +10,8 @@ import './style.css';
 
 const Home = () => {
   const [name, setName] = useState('');
+
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,10 +38,10 @@ const Home = () => {
               <Route exact path="/">
                 <ListCatalog />
               </Route>
-              <Route path="/createlist">
+              <Route exact path="/createlist">
                 <CreateList />
               </Route>
-              <Route path="/list/:id">
+              <Route  exact path="/list/:id">
                 <BucketList />
               </Route>
             </Switch>
