@@ -2,14 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
+const logger = require('morgan');
 const {check,validationResult, body} = require('express-validator');
 const passport = require('passport');
-const { ESRCH } = require('constants');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const mysql = require('mysql');
-const mysqlPromise = require('./mysqlPromise');
-const { isBuffer } = require('util');
-const { resolve } = require('path');
+const fs = require('fs-extra');
+const rfs = require('rotating-file-stream');
 
 
 require('dotenv').config();
@@ -20,6 +19,23 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(logger("dev"));
+
+const logDirectory = path.resolve('log');
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+const accesLogStream = rfs.createStream('access.log',{
+  size: '10MB',
+  interval: '10d',
+  compress: 'gzip',
+  path: logDirectory
+});
+
+
+const preformat = ':date[clf] - :method : url : :status - :response-time ms'
+app.use(logger("combined",{
+  stream: accesLogStream
+}));
 
 //セッション初期化
 app.use(session({
