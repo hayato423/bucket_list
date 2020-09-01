@@ -15,7 +15,7 @@ function App() {
       try {
         const result = await axios.get('http://'+ip.ipAddres+'/api/user');
         console.log(result);
-        SetIsLogin((result.status == 200) ? true : false);
+        SetIsLogin((result.data.id != undefined) ? true : false);
       } catch (err) {
         SetIsLogin(false);
       }
