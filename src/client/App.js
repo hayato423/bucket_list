@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './components/Header/Header';
 import Root from './components/Root/Root';
 import Home from './components/Home/Home';
+import ip from '../ipaddress';
 
 function App() {
   const [isLogin, SetIsLogin] = useState(false);
@@ -12,7 +13,7 @@ function App() {
   useEffect(() => {
     const confirmLogin = async () => {
       try {
-        const result = await axios.get('http://127.0.0.1:3000/api/user');
+        const result = await axios.get('http://'+ip.ipAddres+'/api/user');
         console.log(result);
         SetIsLogin((result.status == 200) ? true : false);
       } catch (err) {

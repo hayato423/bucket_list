@@ -7,6 +7,7 @@ import BucketList from '../BucketList/BucketList';
 import SideBar from '../SideBar/SideBar';
 import ListCatalog from '../ListCatalog/ListCatalog';
 import './style.css';
+import ip from '../../../ipaddress';
 
 const Home = () => {
   const [name, setName] = useState('');
@@ -16,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get('http://127.0.0.1:3000/api/user');
+        const result = await axios.get(`http://${ip.ipAddres}/api/user`);
         //console.log(result);
         setName(result.data.displayName);
       } catch (error) {

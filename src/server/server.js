@@ -10,6 +10,8 @@ const mysql = require('mysql');
 const fs = require('fs-extra');
 const rfs = require('rotating-file-stream');
 
+const ip = require('../ipaddress');
+
 
 require('dotenv').config();
 
@@ -32,7 +34,6 @@ const accesLogStream = rfs.createStream('access.log',{
 });
 
 
-const preformat = ':date[clf] - :method : url : :status - :response-time ms'
 app.use(logger("combined",{
   stream: accesLogStream
 }));
@@ -72,7 +73,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_API_KEY,
   consumerSecret: process.env.TWITTER_API_KEY_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/twitter/callback'
+  callbackURL: 'http://' + ip.ipAddres + '/twitter/callback'
 }, function (token, tokenSecret, profile, callback) {
   //console.log("認証しました")
   return callback(null, profile);
