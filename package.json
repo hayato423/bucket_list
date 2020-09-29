@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "webpack-dev-server --config ./config/webpack.config.dev.js",
-    "server": "nodemon src/server/server.js",
+    "server": "node src/server/server.js",
     "dev": "NODE_ENV=development concurrently \"npm run client\" \"npm run server\"",
     "build": "webpack --config ./config/webpack.config.js --mode development",
     "start": "NODE_ENV=production npm run build && npm run server"
@@ -43,11 +43,14 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
+    "forever": "^3.0.2",
     "http-proxy-middleware": "^1.0.5",
+    "letsencrypt-express": "^2.0.7",
     "log4js": "^6.3.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
+    "nohup": "^0.1.0",
     "passport": "^0.4.1",
     "passport-twitter": "^1.0.4",
     "react": "^16.13.1",

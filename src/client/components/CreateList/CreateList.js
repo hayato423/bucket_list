@@ -37,7 +37,7 @@ export const CreateList = () => {
   }
 
   useEffect(() => {
-    const encodedStr = encodeURIComponent(`バケツリスト「${title}」を作成しました\n#バケツリストメーカー`);
+    const encodedStr = encodeURIComponent(`バケツリスト「${title}」を作成しました\n#バケツリストメーカー\nbucketlistmaker.net`);
     setTwitterHref('https://twitter.com/intent/tweet?text=' + encodedStr);
   }, [posted])
 

@@ -10,7 +10,7 @@ export const Root = () => {
     return (
         <div class="root">
             <div class="text-center">
-                <a href="/twitter/auth" class="btn btn-primary my-5"><i class="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>
+                <a href="/twitter/auth" class="btn btn-primary my-5"><i className="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>
             </div>
             <div class="row">
                 <div class="col-md-4 offset-md-4 text-center">

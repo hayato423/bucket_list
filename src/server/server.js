@@ -234,7 +234,8 @@ app.get('*', function (req, res) {
 })
 
 
-app.listen(3000, () => {
+app.listen(80, () => {
+  process.setuid(1000);
   console.log('server running');
 })
 
