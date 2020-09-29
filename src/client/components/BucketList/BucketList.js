@@ -20,7 +20,7 @@ const BucketList = () => {
   const handleAchievedModalClose = () => {
     setAchievedModalShow(false);
     if (total == achievedCount) {
-      const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目全て達成しました！\n#バケツリストメーカー`);
+      const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目全て達成しました！\n#バケツリストメーカー\nbucketlistmaker.net`);
       setTwitterHref('https://twitter.com/intent/tweet?text=' + encodedStr);
       handleAllAchievedModalShow();
     }
@@ -53,7 +53,7 @@ const BucketList = () => {
   }, [onClick])
 
   useEffect(() => {
-    const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目「${achievedItem}」を達成しました！\n#バケツリストメーカー`);
+    const encodedStr = encodeURIComponent(`バケツリスト「${listTitle}」の項目「${achievedItem}」を達成しました！\n#バケツリストメーカー\nbucketlistmaker.net `);
     setTwitterHref('https://twitter.com/intent/tweet?text=' + encodedStr);
   }, [achievedItem])
 
