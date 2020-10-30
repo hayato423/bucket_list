@@ -5,6 +5,7 @@ import CreateList from '../CreateList/CreateList';
 import listCatalog from '../ListCatalog/ListCatalog';
 import BucketList from '../BucketList/BucketList';
 import SideBar from '../SideBar/SideBar';
+import Root from '../Root/Root';
 import ListCatalog from '../ListCatalog/ListCatalog';
 import './style.css';
 import ip from '../../../ipaddress';
@@ -37,6 +38,9 @@ const Home = () => {
           <div className="col-md-9 py-0 px-0 main_contents">
             <Switch>
               <Route exact path="/">
+                <Root islogin={true} />
+              </Route>
+              <Route exact path="/listcatalog">
                 <ListCatalog />
               </Route>
               <Route exact path="/createlist">

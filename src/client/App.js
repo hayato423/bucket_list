@@ -29,7 +29,7 @@ function App() {
       <Header />
       <Router>
         <Switch>
-          <Route exact path="/*" render={() => (isLogin ? (<Home />) : (<Root />))} />
+          <Route exact path="/*" render={() => (isLogin ? (<Home />) : (<Root islogin={false} />))} />
           {/* <Route path="/*" render={() => (isLogin ? (<Home />) : (<Redirect to="/" />))} /> */}
           {/* <Route path="/*" component={Home} /> */}
           <Route render={() => <h2>Not Found</h2>} />
