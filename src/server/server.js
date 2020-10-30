@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const logger = require('morgan');
-const {check,validationResult, body} = require('express-validator');
+const { check, validationResult, body } = require('express-validator');
 const passport = require('passport');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const mysql = require('mysql');
@@ -11,7 +11,7 @@ const fs = require('fs-extra');
 const rfs = require('rotating-file-stream');
 
 const ip = require('../ipaddress');
-
+const port = 3000;
 
 require('dotenv').config();
 
@@ -26,7 +26,7 @@ app.use(logger("dev"));
 const logDirectory = path.resolve('log');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
-const accesLogStream = rfs.createStream('access.log',{
+const accesLogStream = rfs.createStream('access.log', {
   size: '10MB',
   interval: '10d',
   compress: 'gzip',
@@ -34,7 +34,7 @@ const accesLogStream = rfs.createStream('access.log',{
 });
 
 
-app.use(logger("combined",{
+app.use(logger("combined", {
   stream: accesLogStream
 }));
 
@@ -100,10 +100,10 @@ app.get('/api/user', (req, res) => {
   }
 })
 
-app.post('/api/createlist',[
-  body('title',"タイトルは1文字以上50文字以内で入力してください").isLength({min:1,max:50}).trim().escape(),
-  body('items.*',"項目は1文字以上50文字以内で入力してください").isLength({min:1,max:50}).trim().escape()
-] ,(req, res) => {
+app.post('/api/createlist', [
+  body('title', "タイトルは1文字以上50文字以内で入力してください").isLength({ min: 1, max: 50 }).trim().escape(),
+  body('items.*', "項目は1文字以上50文字以内で入力してください").isLength({ min: 1, max: 50 }).trim().escape()
+], (req, res) => {
 
   const createRandomID = () => {
     const S = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -123,8 +123,8 @@ app.post('/api/createlist',[
   var status = 200;
 
   const errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    return res.status(422).send({errors:errors.array() });
+  if (!errors.isEmpty()) {
+    return res.status(422).send({ errors: errors.array() });
   }
 
   try {
@@ -143,31 +143,31 @@ app.post('/api/createlist',[
 
 
 
-app.get('/api/listcatalog',async (req, res) => {
+app.get('/api/listcatalog', async (req, res) => {
   const twitter_id = req.session.passport.user.id;
-  con.query('select distinct list_id, list_title from bucketlist where twitter_id=? order by list_id',[twitter_id],(err,result1)=> {
-    if(err){
+  con.query('select distinct list_id, list_title from bucketlist where twitter_id=? order by list_id', [twitter_id], (err, result1) => {
+    if (err) {
       console.log(err);
-    }else{
-    }
-    con.query('select list_id, count(list_id) as total  from bucketlist where twitter_id=? group by list_id order by list_id',[twitter_id],(err,result2)=>{
-      if(err){
-        console.log(err);
-      }else{
-        con.query('select list_id , count(is_done=1 or null) as done from bucketlist where twitter_id=? group by list_id order by list_id',[twitter_id],(err,result3)=>{
-          if(err){
-            console.log(err);
-          }else{
-            const resultArray = [];
-            for(let i = 0; i < result1.length; ++i) {
-              resultArray.push({...result1[i],...result2[i],...result3[i]});
+    } else {
+      con.query('select list_id, count(list_id) as total  from bucketlist where twitter_id=? group by list_id order by list_id', [twitter_id], (err, result2) => {
+        if (err) {
+          console.log(err);
+        } else {
+          con.query('select list_id , count(is_done=1 or null) as done from bucketlist where twitter_id=? group by list_id order by list_id', [twitter_id], (err, result3) => {
+            if (err) {
+              console.log(err);
+            } else {
+              const resultArray = [];
+              for (let i = 0; i < result1.length; ++i) {
+                resultArray.push({ ...result1[i], ...result2[i], ...result3[i] });
+              }
+              //console.log(resultArray);
+              res.send(resultArray);
             }
-            //console.log(resultArray);
-            res.send(resultArray);
-          }
-        })
-      }
-    })
+          })
+        }
+      })
+    }
   })
   // [result1,field1] = await mysqlPromise.query(con,'select distinct list_id, list_title from bucketlist where twitter_id=? order by list_id',[twitter_id]);
   // console.log(result1);
@@ -234,7 +234,7 @@ app.get('*', function (req, res) {
 })
 
 
-app.listen(80, () => {
+app.listen(port, () => {
   process.setuid(1000);
   console.log('server running');
 })

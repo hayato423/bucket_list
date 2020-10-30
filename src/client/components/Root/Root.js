@@ -5,12 +5,13 @@ import howto3 from './img/howto3.png';
 import howto4 from './img/howto4.png';
 import './style.css';
 
-export const Root = () => {
+export const Root = (props) => {
+    const islogin = props.islogin;
 
     return (
         <div class="root">
-            <div class="text-center">
-                <a href="/twitter/auth" class="btn btn-primary my-5"><i className="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>
+            <div class="text-center py-5">
+                {!islogin &&<a href="/twitter/auth" class="btn btn-primary my-5"><i className="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>}
             </div>
             <div class="row">
                 <div class="col-md-4 offset-md-4 text-center">
