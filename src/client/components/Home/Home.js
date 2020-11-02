@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch,useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import CreateList from '../CreateList/CreateList';
 import listCatalog from '../ListCatalog/ListCatalog';
@@ -8,17 +9,17 @@ import SideBar from '../SideBar/SideBar';
 import Root from '../Root/Root';
 import ListCatalog from '../ListCatalog/ListCatalog';
 import './style.css';
-import ip from '../../../ipaddress';
+import host from '../../../host';
 
 const Home = () => {
   const [name, setName] = useState('');
-
   const location = useLocation();
+  const isLogin = useSelector(state => state.login.isLogin);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(`http://${ip.ipAddres}/api/user`);
+        const result = await axios.get(`http://${host.addres}/api/user`);
         //console.log(result);
         setName(result.data.displayName);
       } catch (error) {
@@ -41,13 +42,15 @@ const Home = () => {
                 <Root islogin={true} />
               </Route>
               <Route exact path="/listcatalog">
-                <ListCatalog />
+                {isLogin ? <ListCatalog /> : <Redirect to="/" />}
               </Route>
               <Route exact path="/createlist">
-                <CreateList />
+                {isLogin ? <CreateList /> : <Redirect to="/" />}
+                {/* <CreateList /> */}
               </Route>
               <Route  exact path="/list/:id">
-                <BucketList />
+                {isLogin ? <BucketList /> : <Redirect to="/" />}
+                {/* <BucketList /> */}
               </Route>
             </Switch>
           </div>

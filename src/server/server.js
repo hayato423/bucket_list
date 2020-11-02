@@ -10,8 +10,7 @@ const mysql = require('mysql');
 const fs = require('fs-extra');
 const rfs = require('rotating-file-stream');
 
-const ip = require('../ipaddress');
-const port = 3000;
+const host = require('../host');
 
 require('dotenv').config();
 
@@ -73,7 +72,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new TwitterStrategy({
   consumerKey: process.env.TWITTER_API_KEY,
   consumerSecret: process.env.TWITTER_API_KEY_SECRET,
-  callbackURL: 'http://' + ip.ipAddres + '/twitter/callback'
+  callbackURL: 'http://' + host.name +':'+ host.port + '/twitter/callback'
 }, function (token, tokenSecret, profile, callback) {
   //console.log("認証しました")
   return callback(null, profile);
@@ -227,6 +226,13 @@ app.get('/twitter/callback', passport.authenticate('twitter', {
   res.redirect('/');
 });
 
+app.get('/api/logout',(req, res) => {
+  req.session.destroy((err) => {
+    if(err) console.log(err);
+  });
+  res.redirect('/');
+})
+
 
 app.get('*', function (req, res) {
   res.sendFile(path.resolve('./', 'dist', 'index.html'));
@@ -234,7 +240,7 @@ app.get('*', function (req, res) {
 })
 
 
-app.listen(port, () => {
+app.listen(host.port,host.name, () => {
   process.setuid(1000);
   console.log('server running');
 })

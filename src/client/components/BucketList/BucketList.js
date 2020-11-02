@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import './style.css';
-import ip from '../../../ipaddress';
+import host from '../../../host';
 
 const BucketList = () => {
   const [bucketList, setBucketList] = useState([]);
@@ -34,7 +34,7 @@ const BucketList = () => {
 
   useEffect(() => {
     const itemFetch = async () => {
-      const result = await axios.get(`http://${ip.ipAddres}/api/list/${list_id}`)
+      const result = await axios.get(`http://${host.addres}/api/list/${list_id}`)
         .catch(err => {
           console.log(err);
         });
@@ -59,7 +59,7 @@ const BucketList = () => {
 
 
   const achievement = async (list_id, item_id, item_name) => {
-    const result = await axios.put(`http://${ip.ipAddres}/api/achievement/${list_id}/${item_id}`);
+    const result = await axios.put(`http://${host.addres}/api/achievement/${list_id}/${item_id}`);
     setOnClick(!onClick);
     if (result.status == 200) {
       setAchievedItem(item_name);
