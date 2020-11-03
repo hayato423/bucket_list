@@ -1,5 +1,5 @@
-const name = '127.0.0.1';
-const port = 3000;
+const name = 'bucketlistmaker.net';
+const port = 80;
 const addres = name +':'+ port;
 module.exports = {
   name,

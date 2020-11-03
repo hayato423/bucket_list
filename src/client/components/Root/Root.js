@@ -11,7 +11,7 @@ export const Root = (props) => {
     return (
         <div className="root">
             <div className="text-center py-5">
-                {!islogin &&<a href="/twitter/auth" className="btn btn-primary my-5"><i classNameName="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>}
+                {!islogin &&<a href="/twitter/auth" className="btn btn-primary my-5"><i className="fab fa-twitter mr-1"></i>Twitterで登録・ログイン</a>}
             </div>
             <div className="row">
                 <div className="col-md-4 offset-md-4 text-center">

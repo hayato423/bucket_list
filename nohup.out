@@ -142,3 +142,81 @@ Emitted 'error' event on Server instance at:
   address: '0.0.0.0',
   port: 80
 }
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRNOTAVAIL: address not available 52.193.197.160:80
+    at Server.setupListenHandle [as _listen2] (net.js:1296:21)
+    at listenInCluster (net.js:1361:12)
+    at doListen (net.js:1498:7)
+    at processTicksAndRejections (internal/process/task_queues.js:85:21)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EADDRNOTAVAIL',
+  errno: 'EADDRNOTAVAIL',
+  syscall: 'listen',
+  address: '52.193.197.160',
+  port: 80
+}
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRNOTAVAIL: address not available 52.193.197.160:80
+    at Server.setupListenHandle [as _listen2] (net.js:1296:21)
+    at listenInCluster (net.js:1361:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1498:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:68:8)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EADDRNOTAVAIL',
+  errno: 'EADDRNOTAVAIL',
+  syscall: 'listen',
+  address: '52.193.197.160',
+  port: 80
+}
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRNOTAVAIL: address not available 52.193.197.160:80
+    at Server.setupListenHandle [as _listen2] (net.js:1296:21)
+    at listenInCluster (net.js:1361:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (net.js:1498:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:68:8)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EADDRNOTAVAIL',
+  errno: 'EADDRNOTAVAIL',
+  syscall: 'listen',
+  address: '52.193.197.160',
+  port: 80
+}
+events.js:292
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EACCES: permission denied 0.0.0.0:80
+    at Server.setupListenHandle [as _listen2] (net.js:1296:21)
+    at listenInCluster (net.js:1361:12)
+    at Server.listen (net.js:1447:7)
+    at Function.listen (/home/bitnami/bucket_list/node_modules/express/lib/application.js:618:24)
+    at Object.<anonymous> (/home/bitnami/bucket_list/src/server/server.js:243:5)
+    at Module._compile (internal/modules/cjs/loader.js:1137:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+    at Module.load (internal/modules/cjs/loader.js:985:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1340:8)
+    at processTicksAndRejections (internal/process/task_queues.js:84:21) {
+  code: 'EACCES',
+  errno: 'EACCES',
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 80
+}

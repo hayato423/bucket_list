@@ -240,7 +240,7 @@ app.get('*', function (req, res) {
 })
 
 
-app.listen(host.port,host.name, () => {
+app.listen(host.port, () => {
   process.setuid(1000);
   console.log('server running');
 })
